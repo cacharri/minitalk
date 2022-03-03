@@ -23,7 +23,7 @@ int	main(void)
 	a = getpid();
 	write(1, "The server PID is: ", 19);
 	write(1, (void *)sizeof(a), ft_strlen(&a));
-	sig.sig_sigaction = send_pid;
+	sig.sa_sigaction = send_pid;
 	while (1)
 	{
 		sigaction(SIGUSR1, &sig, NULL);
