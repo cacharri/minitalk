@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-void send_pid()
+void send_pid(int a, siginfo *t, void *)
 
 int	main(void)
 {
