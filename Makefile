@@ -6,31 +6,33 @@
 #    By: ialvarez <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 19:41:46 by ialvarez          #+#    #+#              #
-#    Updated: 2022/02/28 20:30:55 by ialvarez         ###   ########.fr        #
+#    Updated: 2022/03/08 21:09:42 by ialvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-NAME = client
-NAMETWO = server
+NAME = server
+NAMETWO = client
 
-SRCS = client.c server.c
+SRCS = server.c
+SRCS2 = client.c
 
-OBJECTS = $(SRCS:.c=.o)
 LIBFT_DIR = libft/
 LIB_NAME = $(LIBFT_DIR)libft.a
 INCLUDES = -I. -I$(LIBFT_DIR)
 FSANITIZE = -g3 -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
-all: $(NAME)
+all: $(NAME) $(NAMETWO)
 
-$(NAME): $(OBJECTS)
-	@make -s -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) $^ -L ./libft/ -l ft -o $(NAME)
-	@$(CC) $(CFLAGS) $^ -L ./libft/ -l ft -o $(NAMETWO)
+$(NAME): $(SRCS)
+	@make -C $(LIBFT_DIR)
+	@$(CC) $(CFLAGS) $(SRCS) -L ./libft/ -lft -o $(NAME)
 
-debug: $(OBJECTS)
+$(NAMETWO): $(SRCS2)
+	@$(CC) $(CFLAGS) $(SRCS2) -L ./libft/ -lft -o $(NAMETWO)
+
+debug: $(SRCS) $(SRCS2)
 	@make -s -C $(LIBFT_DIR)
 	@$(CC) $(CFLAGS) $(FSANITIZE) $^ -L ./libft/ -l ft -o $(NAME)
 
@@ -38,12 +40,11 @@ clean:
 	@make -C $(LIBFT_DIR) clean
 	@rm -f $(OBJECTS)
 
-normi:
-	norminette $(SRCS)
-
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME)
+	@rm -f $(NAMETWO)
+
 
 re: fclean all
 
