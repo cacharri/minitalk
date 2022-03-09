@@ -6,7 +6,7 @@
 /*   By: ialvarez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:18:41 by ialvarez          #+#    #+#             */
-/*   Updated: 2022/03/08 21:09:39 by ialvarez         ###   ########.fr       */
+/*   Updated: 2022/03/09 19:55:15 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ static void	writting(int pid, char br)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int PID;
-	int i;
+	int	pid;
+	int	i;
 
-	PID = 0;
+	pid = 0;
 	i = 0;
 	if (argc == 3)
 	{
-		PID = ft_atoi(argv[1]);
+		pid = ft_atoi(argv[1]);
 		while (argv[2][i] != '\0')
-			writting(PID, argv[2][i++]);
+			writting(pid, argv[2][i++]);
+		writting(pid, '\0');
 	}
-	writting(PID, '\0');
 	return (0);
 }

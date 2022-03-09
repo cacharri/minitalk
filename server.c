@@ -6,28 +6,28 @@
 /*   By: ialvarez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 18:19:51 by ialvarez          #+#    #+#             */
-/*   Updated: 2022/03/08 21:09:48 by ialvarez         ###   ########.fr       */
+/*   Updated: 2022/03/09 20:01:14 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int count = 0;
+int	g_count = 0;
 
 static void	copy(int bit)
 {
-	static char x;
+	static char	x;
 
-	if (count == 0)
+	if (g_count == 0)
 		x = 0;
-	x += bit << count;
-	count++;
-	if (count == 8)
+	x += bit << g_count;
+	g_count++;
+	if (g_count == 8)
 	{
 		ft_putstr_fd(&x, 1);
 		if (x == '\0')
 			ft_putstr_fd("\n", 1);
-		count = 0;
+		g_count = 0;
 	}
 }
 
@@ -41,7 +41,6 @@ static	void	handle(int sig)
 
 int	main(void)
 {
-
 	struct sigaction	sig;
 	sigset_t			block;
 
@@ -57,7 +56,5 @@ int	main(void)
 	ft_putnbr_fd(getpid(), 1);
 	ft_putstr_fd("\n", 1);
 	while (1)
-	{
 		pause();
-	}
 }
